@@ -27,7 +27,7 @@ class Post(models.Model):
         self.save()
 
 
-class post_comment(models.Model):
+class PostComment(models.Model):
     author = models.CharField(max_length = 256)
     post = models.ForeignKey(Post, related_name='comments')
     text = models.TextField()
