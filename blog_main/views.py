@@ -120,7 +120,7 @@ def delete_comment(request, pk):
 
 
 @login_required
-def publish_post(request, pk):
+def post_publish(request, pk):
     post = get_object_or_404(Post, pk = pk)
     post.publish_post()
     return redirect('blog_main:post_detail')

@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^posts/(?P<pk>\d+)/add_comment/$', views.add_comment_to_post(), name = 'post_add_comment'),
     url(r'^posts/(?P<pk>\d+)/comments/(?P<pk_alt>\d+)/approve/$', views.aprove_comment, name = 'aprove_comment'),
     url(r'^posts/(?P<pk>\d+)/comments/(?P<pk_alt>\d+)/delete/$', views.delete_comment, name = 'delete_comment'),
+    url(r'^posts/(?P<pk>\d+)/publish/$', views.post_publish, name = 'post_publish'),
 
 ]
