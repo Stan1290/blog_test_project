@@ -1,4 +1,59 @@
+
 {% extends 'base.html' %}
 
-{% block body_block %}
-{% endblock body_block %}
+
+
+{%block title_block %}Details for {{post.pk}}{% endblock title_block %}
+
+
+
+{% block content_block %}
+<div class="jumbotron" style="background-color:#a7c6cc;">
+
+
+<h3>Title: {{post.title}}</h3>
+<p>Post was created on: {{post.creation_date}} </p>
+{% if post.publish_date %}
+
+<p>Published on: </p>
+<u>{{post.publish_date}}</u>
+{% else %}
+<a class="btn btn-success" href="{% url 'blog_main:post_publish' pk=post.pk %}">Publish</a>
+{% endif %}
+<blockquote>
+  <p>{{post.text|safe|linebreaks}}</p>
+</blockquote>
+
+{% if user.is_authenticated %}
+    <a class="btn btn-info" href="{% url 'blog_main:post_update' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span> Edit Post</a>
+
+    <a href="{% url 'blog_main:post_delete' pk=post.pk %}"><span class="glyphicon glyphicon-trash"></span>Delete Post </a>
+{% endif %}
+
+<hr>
+    <a class="btn btn-default" href="{% url 'blog_main:post_add_comment' pk=post.pk %}">Add a comment</a>
+    <p></p>
+
+    {% for comment in post.comments.all %}
+{% if user.is_authenticated  or comment.aproved_comment %}
+
+    <p class="lead">{{comment.text|safe|linebreaks}}</p>
+    <blockquote>
+  <p>{{comment.text}}</p>
+  <footer>Created by: <cite title="Source Title">{{comment.author}}</cite></footer>
+</blockquote>
+    <a href="{% url 'blog_main:delete_comment' pk=comment.pk %}">
+        <span class="glyphicon glyphicon-remove" >Remove Comment</span>
+    </a>
+    <a href="{% url 'blog_main:aprove_comment' pk=comment.pk %}">
+        <span class="glyphicon glyphicon-ok" >Approve</span>
+    </a>
+{% endif %}
+
+
+{% empty %}
+<h4>No comments posted</h4>
+
+{% endfor %}
+</div>
+{% endblock content_block %}

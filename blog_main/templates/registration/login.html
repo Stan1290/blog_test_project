@@ -1,0 +1,21 @@
+{% extends 'blog_main/base.html' %}
+
+{% block title_block %}Login  {% endblock title_block %}
+
+
+{% block content_block %}
+    <h1>Please sign in as a superuser: </h1>
+    {% if form.errors %}
+    <h1>The credentials provided didn't match</h1>
+    <h4>Please try again</h4>
+    {% endif %}
+
+    <form  action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" class="btn btn-primary"  value="Login">
+        <input type="hidden" name="next" value="{{next_page}}">
+    </form>
+
+
+{% endblock content_block %}

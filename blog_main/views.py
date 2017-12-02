@@ -17,7 +17,7 @@ from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (TemplateView, ListView,
 DeleteView, CreateView,
-UpdateView, DeleteView )
+UpdateView, DetailView )
 
 
 
@@ -27,16 +27,20 @@ UpdateView, DeleteView )
 
 
 class AboutView(TemplateView):
-    template_name = 'about.html'
+    template_name = 'blog_main/about.html'
 
-class PostList(ListView):
+class PostListView(ListView):
     model = Post
 
     def get_queryset(self):
         ### Quering the database for Post objects and filtering the data by
         ### Publish_date earlier than current time and
         ### ordering the result by most recent posts
-        return Post.objects.filter(publish_date__lte = timezone.now()).order_by('-published_date'))
+        return Post.objects.filter(publish_date__lte = timezone.now()).order_by('-publish_date')
+
+
+class PostDetailView(DetailView):
+    model = Post
 
 
 class PostCreateView(CreateView, LoginRequiredMixin):
@@ -55,7 +59,7 @@ class PostUpdateView(UpdateView, LoginRequiredMixin):
     model = Post
     login_url = '/login/'
     redirect_field_name = 'blog_main/post_detail.html'
-    from_class = PostForm
+    form_class = PostForm
 
 class PostDeleteView(DeleteView, LoginRequiredMixin):
     model = Post
@@ -101,7 +105,7 @@ def add_comment_to_post(request, pk):
         ### If request method is not POST, creating comment form object
         form = CommentForm()
     ### Returning html page with form as context
-    return render('blog_main/comment_form.html', {'form' : form})
+    return render(request, 'blog_main/comment_form.html', {'form' : form})
 
 
 
@@ -109,18 +113,18 @@ def add_comment_to_post(request, pk):
 def aprove_comment(request, pk):
     comment = get_object_or_404(Comment, pk = pk)
     comment.approve_comment()
-    return redirect("post_detail", pk_alt = comment.post.pk)
+    return redirect("post_detail", pk = comment.post.pk)
 
 @login_required
 def delete_comment(request, pk):
     comment = get_object_or_404(Comment, pk)
     post_pk = comment.post.pk
     comment.detele()
-    return redirect('blog_main:post_detail', pk_alt = post_pk)
+    return redirect('blog_main:post_detail', pk = post_pk)
 
 
 @login_required
-def post_publish(request, pk):
+def publish_post(request, pk):
     post = get_object_or_404(Post, pk = pk)
     post.publish_post()
     return redirect('blog_main:post_detail')
