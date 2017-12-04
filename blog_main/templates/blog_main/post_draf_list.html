@@ -1,0 +1,23 @@
+{% extends 'blog_main/base.html' %}
+{% block title_block %}
+Delete Post {{post.pk}}
+{% endblock title_block %}
+
+
+{% block content_block %}
+<div class="container">
+    <p></p>
+<h3>Post Drafts: </h3>
+{% for post in post %}
+    <div class="jumbotron">
+        <p>Date created: {{post.creation_date}}</p>
+        <p>{{post.title}}</p>
+        <p class="lead"> {{post.text|truncatechars:200}}</p>
+
+    </div>
+
+
+{% endfor %}
+</div>
+
+{% endblock content_block  %}

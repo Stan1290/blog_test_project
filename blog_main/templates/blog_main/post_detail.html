@@ -8,21 +8,25 @@
 
 
 {% block content_block %}
-<div class="jumbotron" style="background-color:#a7c6cc;">
+<div class="jumbotron" style="background-color:#d3d1d1;">
 
 
-<h3>Title: {{post.title}}</h3>
-<p>Post was created on: {{post.creation_date}} </p>
+<h2 class="post-title">Title: {{post.title}}</h2>
+<u class="post-details">Post was created on: {{post.creation_date}}</u>
 {% if post.publish_date %}
 
-<p>Published on: </p>
-<u>{{post.publish_date}}</u>
+
+
+<u class="post-details">Published on: {{post.publish_date}}</u>
 {% else %}
 <a class="btn btn-success" href="{% url 'blog_main:post_publish' pk=post.pk %}">Publish</a>
 {% endif %}
-<blockquote>
-  <p>{{post.text|safe|linebreaks}}</p>
+<div class="container">
+
+<blockquote class="post-body-test">
+  <p >{{post.text|safe|linebreaks}}</p>
 </blockquote>
+</div>
 
 {% if user.is_authenticated %}
     <a class="btn btn-info" href="{% url 'blog_main:post_update' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span> Edit Post</a>

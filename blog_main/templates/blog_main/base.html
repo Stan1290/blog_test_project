@@ -17,8 +17,8 @@
         {# Custom CSS#}
         <link rel="stylesheet" href="{% static 'css/blog_main.css' %}">
 
-        {# Fonts#}
-        <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
+        {# Google Fonts#}
+        <link href="https://fonts.googleapis.com/css?family=Allura|Arima+Madurai|Arizonia|Cinzel+Decorative|Forum|Great+Vibes|Istok+Web" rel="stylesheet">
 
 
 
@@ -31,15 +31,15 @@
     <div class="container">
 
 
-      <ul class="nav navbar-nav">
-        <li><a class='navbar-brand bigbrand' href="{% url 'blog_main:post_list' %}">My Blog</a></li>
+      <ul class="nav navbar-nav blog-nav-menu">
+        <li><a class='navbar-brand bigbrand blog-brand' href="{% url 'blog_main:post_list' %}">My Blog</a></li>
         <li><a href="{% url 'blog_main:about_me'%}">About</a></li>
         <li><a href="https://github.com/Stan1290">Me on <img src="https://pbs.twimg.com/media/BeM2XAiCQAA91O-.png"  class="my_link_pics" alt="git_hub_logo"> </a></li>
         <li><a href="https://www.linkedin.com/in/s-naydenkov-software-guy">Me on <img src="https://content.linkedin.com/content/dam/brand/site/img/visual-guidelines.png" class="my_link_pics" alt="linked_in_logo"> </a></li>
 
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right blog-nav-menu">
         {% if user.is_authenticated %}
         <li>
           <a href="{% url 'blog_main:post_create' %}" >New Post</a>

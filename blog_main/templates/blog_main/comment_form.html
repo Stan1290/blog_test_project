@@ -1,6 +1,24 @@
 {% extends 'blog_main/base.html' %}
 {% block title_block %}
-
+New commenet
 {% endblock title_block %}
+
+
 {% block content_block %}
+<div class="container">
+    <div class="container">
+        <form class=""  method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-default" >Comment</button>
+
+        </form>
+        <script type="text/javascript">
+            var editor = new MediumEditor('.editable')
+        </script>
+    </div>
+
+</div>
+
+
 {% endblock content_block %}

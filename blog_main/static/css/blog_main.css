@@ -3,17 +3,33 @@ img.my_link_pics{
     width: auto;
 }
 
-h1.tmpp{
-    color:red;
-}
 
-p{
-    color: #3f3e3e;
-}
-
-a {
-    color: #b302f9;
-}
 body{
     background-color: #efefef;
+}
+
+
+.post-title{
+    font-family: 'Forum', cursive;
+    font-size: 3.5em;
+}
+
+.post-body-test{
+    font-family: 'Great Vibes', cursive;
+    font-size: 1em;
+}
+
+.blog-brand{
+    font-family: 'Allura', cursive;
+    font-size: 1.7m;
+    background-color: #acf9f4;
+}
+
+ .blog-nav-menu{
+     font-family: 'Forum', cursive;
+ }
+
+.post-details{
+    font-size: 0.5em;
+    font-family: 'Istok Web', sans-serif;
 }

@@ -16,7 +16,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog_main:blog_detail', kwargs = {'pk': self.pk})
+        return reverse('blog_main:post_detail', kwargs = {'pk': self.pk})
 
     def publish_post(self):
         self.publish_date = timezone.now()
